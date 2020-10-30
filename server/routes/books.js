@@ -1,3 +1,5 @@
+// COMP229-003 Midterm, Farzam Mohammadi Assad, 301109706, Oct 30 2020
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
@@ -25,7 +27,7 @@ router.get('/', (req, res, next) => {
 
 //  GET the Book Details page in order to add a new Book
 router.get('/add', (req, res, next) => {
-
+ 
   res.render('books/details', {
     title: 'Home',
     books: book
@@ -35,6 +37,8 @@ router.get('/add', (req, res, next) => {
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
+  
+  //Creation of new book object
   let newBook = book({
     "Title": req.body.title,
     "Description": req.body.description,
@@ -58,7 +62,8 @@ router.post('/add', (req, res, next) => {
 
 // GET the Book Details page in order to edit an existing Book
 router.get('/:id', (req, res, next) => {
-
+  
+  //Finding specified book by ID and passing it to details view
   let id = req.params.id;
 
   
@@ -78,6 +83,7 @@ router.get('/:id', (req, res, next) => {
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
 
+  //Transfer of new book values/edited book values to the book that matches the passed ID
   let id = req.params.id;
 
   let editedBook = book({
@@ -105,6 +111,7 @@ router.post('/:id', (req, res, next) => {
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
 
+  //removal of book that matches passed ID
   let id = req.params.id;
 
   book.remove({_id: id}, (err) =>{
